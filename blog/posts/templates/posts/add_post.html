@@ -1,0 +1,9 @@
+{% extends "posts/base.html" %}
+{% block content %}
+ <h1>ADD POST</h1>
+<form action="posts/add_post" method="POST">
+  <p><input name="title"></p>
+  <p><input name="content"></p>
+  <p><input type="submit" value="Создать"></p>
+</form>
+{% endblock %}

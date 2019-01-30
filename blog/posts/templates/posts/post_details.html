@@ -1,0 +1,9 @@
+{% extends "posts/base.html" %}
+
+{% block content %}
+    <h2 class="blog-post-title"><a href="#">{{ post.title }}</a></h2>
+    <p class="blog-post-meta">{{ post.updated_on }}</p>
+    <p>{{ post.content }}</p>
+    <p class="blog-post-meta">Keywords: <br>{{ post.keywords }}</p>
+    <p class="blog-post-meta">Created on {{ post.created_on }}</p>
+{% endblock %}
