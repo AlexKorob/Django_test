@@ -1,9 +1,13 @@
 {% extends "posts/base.html" %}
 {% block content %}
- <h1>ADD POST</h1>
-<form action="posts/add_post" method="POST">
-  <p><input name="title"></p>
-  <p><input name="content"></p>
-  <p><input type="submit" value="Создать"></p>
-</form>
+  <h1>ADD POST</h1>
+  {% if errors %}
+    <div class = "alert-danger">{{ errors }}</div>
+  {% endif %}
+  <form action="/posts/add_post" method="POST">
+    {% csrf_token %}
+    <p><input name="title"></p>
+    <p><textarea name="content" rows="7"></textarea></p>
+    <p><input type="submit" value="Создать"></p>
+  </form>
 {% endblock %}

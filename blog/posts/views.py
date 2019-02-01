@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Post, Category
-
+from .forms import PostForm
 
 def index(request):
     posts = Post.objects.all()
@@ -21,9 +21,8 @@ def add_post(request):
     if request.method == "POST":
         form = PostForm(request.POST)
         if form.is_valid():
-            Post.objects.create(
-                title=form.cleaned_data.get("title"), content=form.cleaned_data.get("content")
-            )
-
-        render(request, "posts/add_post.html", context={"errors":form.errors})
+            post = Post.objects.create(**form.cleaned_data)
+            post.save()
+            return redirect("/posts")
+        return render(request, "posts/add_post.html", context={"errors": form.errors})
     return render(request, "posts/add_post.html")

@@ -12,8 +12,9 @@ class Post(models.Model):
        (REJECTED, "rejected")
     ]
 
-    title = models.CharField(max_length=100, unique=True)
-    content = models.TextField()
+    title = models.CharField(max_length=100, unique=True, error_messages={'required': 'Заголовок не должен быть пустым',
+                                                                          'unique': 'Такой заголовок уже существует'})
+    content = models.TextField(error_messages={'required': 'Поле контента не может быть пустым'})
     status = models.SmallIntegerField(choices=STATUS, default=STATUS_DRAFT)
     category = models.ForeignKey("Category", on_delete=models.CASCADE, null=True, related_name="posts")
     keywords = models.TextField(max_length=500, blank=True)

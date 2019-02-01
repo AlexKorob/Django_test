@@ -1,0 +1,12 @@
+[
+{
+  "model": "posts.category",
+  "pk": 1,
+  "fields": {
+    "name": "travel",
+    "metakeywords": "",
+    "description": "",
+    "is_active": true
+  }
+}
+]
