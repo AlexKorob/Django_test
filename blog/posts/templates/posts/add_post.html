@@ -4,10 +4,11 @@
   {% if errors %}
     <div class = "alert-danger">{{ errors }}</div>
   {% endif %}
-  <form action="/posts/add_post" method="POST">
+  <form action="{% url 'posts:add_post' %}" method="POST">
     {% csrf_token %}
     <p><input name="title"></p>
     <p><textarea name="content" rows="7"></textarea></p>
+    {{ form.category }}
     <p><input type="submit" value="Создать"></p>
   </form>
 {% endblock %}

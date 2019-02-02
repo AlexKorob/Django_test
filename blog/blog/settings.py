@@ -126,3 +126,36 @@ try:
     from .settings_local import *
 except ImportError as e:
     print(e)
+
+
+# LOGGERS
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+        'file': {
+            'class': 'logging.FileHandler',
+            'level': 'INFO',
+            'filename': 'log.txt',
+        },
+        'mail_admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler',
+            'email_backend': 'django.core.mail.backends.console.EmailBackend',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': 'INFO',
+        },
+        'my_logger': {
+            'handlers': ['console', 'file', 'mail_admins'],
+            'level': 'INFO',
+        },
+    },
+}
