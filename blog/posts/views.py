@@ -26,7 +26,7 @@ class PostCategoryListView(ListView):
         return self.model.objects.filter(category_id=self.kwargs["category_id"])
 
 def index(request):
-    posts = Post.objects.all()
+    posts = Post.objects.all().select_related("category")
     categories = Category.objects.all()
     return render(request, "posts/index.html", context={"posts": posts, "categories": categories})
 

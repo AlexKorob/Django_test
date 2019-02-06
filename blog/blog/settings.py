@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'debug_toolbar',
     'posts',
+    'tags',
     'groups',
 ]
 
@@ -49,7 +51,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
+
+INTERNAL_IPS = ["127.0.0.1", ]
 
 ROOT_URLCONF = 'blog.urls'
 
@@ -145,7 +150,7 @@ LOGGING = {
         'mail_admins': {
             'level': 'ERROR',
             'class': 'django.utils.log.AdminEmailHandler',
-            'email_backend': 'django.core.mail.backends.console.EmailBackend',
+            'email_backend': 'django.core.mail.backends.filebased.EmailBackend',
         },
     },
     'loggers': {
@@ -157,5 +162,14 @@ LOGGING = {
             'handlers': ['console', 'file', 'mail_admins'],
             'level': 'INFO',
         },
+        'django.db.backends': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
     },
 }
+
+EMAIL_FILE_PATH = "/tmp/messages/"
+
+ADMINS = [("Alex", "alexkorob96@gmail.com"),]
