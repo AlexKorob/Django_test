@@ -1,3 +1,14 @@
 from django.contrib import admin
+from tags.models import TagItem, Tag
 
-# Register your models here.
+
+class TagAdmin(admin.ModelAdmin):
+    pass
+
+
+class TagItemAdmin(admin.ModelAdmin):
+    pass
+
+
+admin.site.register(Tag, TagAdmin)
+admin.site.register(TagItem, TagItemAdmin)

@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.contenttypes.fields import GenericRelation
 from tags.models import TagItem
+from django.contrib.auth.models import User
 
 
 class Post(models.Model):
@@ -22,6 +23,7 @@ class Post(models.Model):
     keywords = models.TextField(max_length=500, blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateField(auto_now=True)
+    author = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
     tags = GenericRelation(TagItem)
 
     class Meta:
