@@ -21,6 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("posts/", include("posts.urls")),
     path("groups/", include("groups.urls")),
+    path('i18n/', include('django.conf.urls.i18n')),     # localization
 ]
 
 if settings.DEBUG:

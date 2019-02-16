@@ -1,18 +1,25 @@
+import time
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.shortcuts import render, redirect
 from .models import Post, Category
 from .forms import PostForm
 from django.views.generic import ListView
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
-from django.http import Http404
+from django.views.decorators.cache import cache_page
+from django.core.cache import caches
+from django.utils.translation import gettext_lazy as _
+
+
+cache = caches["default"]
 
 
 class PostListView(ListView):
     model = Post
     template_name = "posts/index.html"
     context_object_name = "posts"
+    time.sleep(5)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -29,6 +36,7 @@ class PostCategoryListView(ListView):
         return self.model.objects.filter(category_id=self.kwargs["category_id"])
 
 
+@cache_page(3600)   # time cache 3600
 def index(request):
     posts = Post.objects.all().select_related("category")
     categories = Category.objects.all()
@@ -59,10 +67,20 @@ def add_post(request):
 
 def logining(request):
     if request.method == "GET":
-        return render(request, "posts/login.html", {})
+        c = cache.get("cached_key_logining")
+        if c is None:
+            time.sleep(5)
+            c = cache.set("cached_key_logining", render(request, "posts/login.html", {}))
+        return c
     elif request.method == "POST":
         u = authenticate(username=request.POST["username"], password=request.POST["password"])
         if u is None:
             raise Http404()
         login(request, u)
         return redirect("/posts/")
+
+
+def return_localization_str(request):
+    string_2 = _("Hello World")
+    string = _("test %(test)d") % {"test": 1}
+    return HttpResponse(string_2)

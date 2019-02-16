@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load I18N %}
 
 <!doctype html>
 <html lang="en">
@@ -35,7 +36,7 @@
   <header class="blog-header py-3">
     <div class="row flex-nowrap justify-content-between align-items-center">
       <div class="col-4 pt-1">
-        <a class="text-muted" href="#">Subscribe</a>
+        <a class="text-muted" href="#">{% trans "Text" %} Subscribe</a>
         <!-- <p class="text-muted">Вы вошли как: {{ request.user.username }}</p> -->
       </div>
       <div class="col-4 text-center">
