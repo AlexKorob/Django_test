@@ -16,14 +16,14 @@ class Post(models.Model):
     ]
 
     title = models.CharField(max_length=100, unique=True, error_messages={'required': 'Заголовок не должен быть пустым',
-                                                                          'unique': 'Такой заголовок уже существует'})
+                                                                  'unique': 'Такой заголовок уже существует'})
     content = models.TextField(error_messages={'required': 'Поле контента не может быть пустым'})
     status = models.SmallIntegerField(choices=STATUS, default=STATUS_DRAFT)
     category = models.ForeignKey("Category", on_delete=models.CASCADE, null=True, related_name="posts")
     keywords = models.TextField(max_length=500, blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateField(auto_now=True)
-    author = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, null=True, on_delete=models.CASCADE, related_name="posts")
     tags = GenericRelation(TagItem)
 
     class Meta:
