@@ -1,4 +1,3 @@
-import rest_framework
 from django.urls import path, include
 from django.conf.urls import url
 from django.views.decorators.cache import cache_page    # <-- for cache CBV
@@ -21,7 +20,7 @@ urlpatterns = [
     path("api-categories/", api_views.CategoryList.as_view(), name="api_categories"),
     path("api-category-detail/<int:pk>/", api_views.CategoryDetail.as_view(), name="api_categories_detail"),
 
-    url(r'^api-auth/', include('rest_framework.urls')),
+    
     path("users/", api_views.UserList.as_view()),
     path("user-detail/<int:pk>", api_views.UserDetail.as_view()),
 ]

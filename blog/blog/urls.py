@@ -16,12 +16,18 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from . import settings
+from rest_framework_swagger.views import get_swagger_view
+
+schema_view = get_swagger_view(title='Pastebin API')
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("posts/", include("posts.urls")),
     path("groups/", include("groups.urls")),
     path('i18n/', include('django.conf.urls.i18n')),     # localization
+    path('api-auth/', include('rest_framework.urls')),
+    path('', schema_view),
 ]
 
 if settings.DEBUG:

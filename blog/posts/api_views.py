@@ -6,6 +6,7 @@ from .serializer import PostSerializer, CategorySerializer, UserSerializer
 from rest_framework.response import Response
 from rest_framework import status, generics, mixins, permissions
 from django.contrib.auth.models import User
+from rest_framework.viewsets import ModelViewSet
 
 
 # Not Work-----------
