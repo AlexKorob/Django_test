@@ -27,7 +27,7 @@ urlpatterns = [
     path("groups/", include("groups.urls")),
     path('i18n/', include('django.conf.urls.i18n')),     # localization
     path('api-auth/', include('rest_framework.urls')),
-    path('', schema_view),
+    path('swag', schema_view),
 ]
 
 if settings.DEBUG:
