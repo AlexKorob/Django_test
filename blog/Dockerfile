@@ -28,8 +28,10 @@ COPY blog /app
 EXPOSE 8000
 
 # Run app.py when the container launches
-CMD ["python3", "manage.py", "runserver"]
+#CMD ["python3", "manage.py", "runserver"]
+
+CMD ["gunicorn", "-w", "4", "blog.wsgi:application", "--bind", "0.0.0.0:8000"]
 
 ENV PYTHONUNBUFFERED 1
 
-runserver 0.0.0.0:8000
+#runserver 0.0.0.0:8000
